@@ -5,6 +5,11 @@
   "repository": "https://github.com/nikau-2018/chimera-quiz.git",
   "author": "Chimera",
   "license": "MIT",
+  "scripts": {
+    "debug": "nodemon index.js --inspect index",
+    "test": "jest --watchAll --noStackTrace",
+    "start": "node index"
+  },
   "dependencies": {
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0"
