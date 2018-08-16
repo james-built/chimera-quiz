@@ -6,11 +6,11 @@ const fs = require('fs')
 module.exports = router
 
 router.get('/intro', (req, res) => {
-  res.send('intro')
+  res.render('intro', {body: 'intro page'})
 })
 
 router.get('/signup', (req, res) => {
-  res.send('signup')
+  res.render('signup', {body: 'signup page'})
 })
 
 router.post('/createUser', (req, res) => {
@@ -18,16 +18,15 @@ router.post('/createUser', (req, res) => {
   // new function to create a user to place in the leaderboard json. Returns an error and a user object
   // if error, redirect to signup (wishlist show error)
   // if user not null then call the displayquestion function
-
 })
 
-function displayQuestion(req, res, userID, questionID) {
+function displayQuestion (req, res, userID, questionID) {
   // function to grab the question object for given questionID from questions.json and set to viewData
   viewData = {
     userId: userID,
     question: 1
   }
-  //render viewData to question.hbs
+  // render viewData to question.hbs
 }
 
 // submit question
