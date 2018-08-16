@@ -12,18 +12,30 @@ router.get('/intro', (req, res) => {
 router.get('/signup', (req, res) => {
   res.send('signup')
 })
+
 router.post('/createUser', (req, res) => {
   res.send('createUser')
+  // new function to create a user to place in the leaderboard json. Returns an error and a user object
+  // if error, redirect to signup (wishlist show error)
+  // if user not null then call the displayquestion function
+
 })
 
-// display question
-router.post('/displayQuestion', (req, res) => {
-  res.send('display question')
-})
+function displayQuestion(req, res, userID, questionID) {
+  // function to grab the question object for given questionID from questions.json and set to viewData
+  viewData = {
+    userId: userID,
+    question: 1
+  }
+  //render viewData to question.hbs
+}
 
 // submit question
 router.post('/submitAnswer', (req, res) => {
-  res.send('leaderboard')
+  // call a function to check the question is answered correctly. if yes update the leaderboard json for that user
+  // check if there is a following qusetion
+  // if yes, then call displayQuestion with the next questionID
+  // if no, then call quizEnded which will call end game screen
 })
 
 router.get('/leaderboard', (req, res) => {
