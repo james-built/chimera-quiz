@@ -2,30 +2,59 @@ const express = require('express')
 const router = express.Router()
 const path = require('path')
 const fs = require('fs')
+const questionJson = require('questions.json')
 
 module.exports = router
 
 router.get('/intro', (req, res) => {
-  res.render('intro', {body: 'intro page'})
+  res.render('intro', {title: 'intro'})
 })
 
 router.get('/signup', (req, res) => {
-  res.render('signup', {body: 'signup page'})
+  res.render('signup', {title: 'signup'})
 })
 
 router.post('/createUser', (req, res) => {
-  res.send('createUser')
-  // new function to create a user to place in the leaderboard json. Returns an error and a user object
-  // if error, redirect to signup (wishlist show error)
-  // if user not null then call the displayquestion function
+  const newUser = {
+    userId: (+new Date()).toString(36),
+    name: req.body.name,
+    date: Date(),
+    score: 0,
+    done: false
+  }
+  getLeaderboard((err, leaderboardJson) => {
+    if (err) return res.status(500).send('500 error unable to read leaderboard')
+    const updatedLeaderboard = JSON.stringify(leaderboardJson.leaderBoard.push(newUser))
+    fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedLeaderboard, (err) => {
+      if (err) return res.status(500).send('500 error unable to write leaderboard')
+      displayQuestion(req, res, newUser.userId, 1)
+    }
+      // new function to create a user to place in the leaderboard json. Returns an error and a user object
+      // if error, redirect to signup (wishlist show error)
+      // if user not null then call the displayquestion function
+    )
+  })
 })
 
-function displayQuestion (req, res, userID, questionID) {
+function getLeaderboard (callback) {
+  fs.readFile(path.join(__dirname, 'leaderboard.json'), (err, leaderboardData) => {
+    if (err) {
+      callback(err, null)
+    }
+    const leaderboardJson = JSON.parse(leaderboardData)
+    callback(null, leaderboardJson)
+  })
+}
+
+function displayQuestion (req, res, userId, questionId) {
   // function to grab the question object for given questionID from questions.json and set to viewData
-  viewData = {
-    userId: userID,
-    question: 1
+  const ourQuestion = questionJson.questions.find(x => x.questionId === parseInt(questionId))
+  const viewData = {
+    title: 'Question ' + questionId,
+    userId: userId,
+    question: ourQuestion
   }
+  res.render('question', viewData)
   // render viewData to question.hbs
 }
 
