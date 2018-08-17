@@ -1,6 +1,36 @@
 body {
-  background-color:palevioletred;
-  font-family: 'Spirax', cursive;
+  background-color:rgb(144, 247, 247);
+  font-family: 'Baloo Bhai', cursive; 
 }
 
+h1 {
+  color: rgb(21, 21, 109);
+  font-family: 'Baloo Bhai', cursive; 
+  font-size: 80px;
+}
 
+.signup {
+  color: rgb(21, 21, 109);
+  font-size:40px;
+}
+
+input[type=text] {
+  color:rgb(245, 112, 134);
+  font-size: 40px;
+}
+
+h3 {
+  color:  rgb(21, 21, 109);
+  font-family: 'Baloo Bhai', cursive; 
+  font-size: 80px;
+}
+
+img {
+  border-radius: 15px;
+
+}
+
+input[name=selection] {
+  color: rgb(21, 21, 109);
+  font-size: 40px;
+}
