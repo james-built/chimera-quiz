@@ -85,5 +85,14 @@ router.post('/submitAnswer', (req, res) => {
 })
 
 router.get('/leaderboard', (req, res) => {
+  const jsonPath = path.join(__dirname, 'leaderboard.json')
+  fs.readFile(jsonPath, (err, leaderBoardData) => {
+    if (err) {
+      console.log('error')
+    }
+    let leaderBoardJson = JSON.parse(leaderBoardData)
+    console.log(newUser)
+
+    leaderBoardJson.leaderBoard.map(x => x.score)
   res.send('leaderboard')
 })
