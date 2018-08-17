@@ -1,7 +1,7 @@
 {
   "questions": [
     {
-      "questionId": 0,
+      "questionId": 1,
       "questionText": "What is Plankton’s first name?",
       "questionImage": "/images/Plankton-spongebob-squarepants.jpg",
       "textA": "William",
@@ -11,7 +11,7 @@
       "answer": "Sheldon"
     },
     {
-      "questionId": 1,
+      "questionId": 2,
       "questionText": "Who is the oldest Rugrat?",
       "questionImage": "/images/Rugrats.jpg" ,
       "textA": "Chuckie",
@@ -21,7 +21,7 @@
       "answer": "Angelica"
     },
     {
-      "questionId": 2,
+      "questionId": 3,
       "questionText": "Finish the Pokémon theme song. I wanna be the very best... ",
       "questionImage": "images/Pokemon-logo.jpg",
       "textA": "the best that I can be",
