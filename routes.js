@@ -93,7 +93,6 @@ router.get('/leaderboard', (req, res) => {
     }
     let leaderBoardJson = JSON.parse(leaderBoardData)
     let sortedBoard = leaderBoardJson.leaderBoard.sort((a, b) => { return b.score - a.score })
-    console.log(sortedBoard)
     res.render('leaderboard', {sortedBoard})
   })
 })
