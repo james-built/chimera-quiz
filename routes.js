@@ -6,6 +6,10 @@ const questionJson = require('./questions.json')
 
 module.exports = router
 
+router.get('/', (req, res) => {
+  res.redirect('/intro')
+})
+
 router.get('/intro', (req, res) => {
   res.render('intro', {title: 'intro'})
 })
@@ -27,9 +31,7 @@ router.post('/createUser', (req, res) => {
     if (err) {
       console.log('error')
     }
-
     let leaderBoardJson = JSON.parse(leaderBoardData)
-    console.log(newUser)
     leaderBoardJson.leaderBoard.push(newUser)
     const updatedJson = JSON.stringify(leaderBoardJson, null, 4)
     fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedJson, (err) => {
@@ -38,31 +40,6 @@ router.post('/createUser', (req, res) => {
     })
   })
 })
-
-/*   getLeaderboard((err, leaderboardJson) => {
-    if (err) return res.status(500).send('500 error unable to read leaderboard')
-    const updatedLeaderboard = JSON.stringify(leaderboardJson.leaderBoard.push(newUser))
-    fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedLeaderboard, (err) => {
-      if (err) return res.status(500).send('500 error unable to write leaderboard')
-      displayQuestion(req, res, newUser.userId, 1)
-    }
-      // new function to create a user to place in the leaderboard json. Returns an error and a user object
-      // if error, redirect to signup (wishlist show error)
-      // if user not null then call the displayquestion function
-    )
-  })
-})
-
-function getLeaderboard (callback) {
-  const jsonPath = path.join(__dirname, 'leaderboard.json')
-  fs.readFile(jsonPath, (err, leaderboardData) => {
-    if (err) {
-      callback(err, null)
-    }
-    const leaderboardJson = JSON.parse(leaderboardData)
-    callback(null, leaderboardJson)
-  })
-} */
 
 function displayQuestion (req, res, userId, questionId) {
   // function to grab the question object for given questionID from questions.json and set to viewData
@@ -81,12 +58,10 @@ router.post('/submitAnswer', (req, res) => {
   const selection = req.body.selection
   const correct = req.body.answer
   const userId = req.body.userId
-  const userId2 = req.body.userId
+  //const userId2 = req.body.userId
   const questionId = req.body.questionId
-  console.log(questionId)
   let nextQuestion = parseInt(questionId)
   nextQuestion++
-  console.log(nextQuestion)
   if (selection === correct) {
     const jsonPath = path.join(__dirname, 'leaderboard.json')
     fs.readFile(jsonPath, (err, leaderBoardData) => {
@@ -103,9 +78,8 @@ router.post('/submitAnswer', (req, res) => {
     })
   }
   const count = questionJson.questions.length
-  console.log(count, nextQuestion)
   if (nextQuestion <= count) {
-    displayQuestion(req, res, userId2, nextQuestion)
+    displayQuestion(req, res, userId, nextQuestion)
   } else {
     res.redirect('/leaderboard')
 }
@@ -119,7 +93,6 @@ router.get('/leaderboard', (req, res) => {
     }
     let leaderBoardJson = JSON.parse(leaderBoardData)
     let sortedBoard = leaderBoardJson.leaderBoard.sort((a, b) => { return b.score - a.score })
-    console.log(sortedBoard)
     res.render('leaderboard', {sortedBoard})
   })
 })
