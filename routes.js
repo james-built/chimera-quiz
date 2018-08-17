@@ -22,7 +22,24 @@ router.post('/createUser', (req, res) => {
     score: 0,
     done: false
   }
-  getLeaderboard((err, leaderboardJson) => {
+  const jsonPath = path.join(__dirname, 'leaderboard.json')
+  fs.readFile(jsonPath, (err, leaderBoardData) => {
+    if (err) {
+      console.log('error')
+    }
+
+    let leaderBoardJson = JSON.parse(leaderBoardData)
+    console.log(newUser)
+    leaderBoardJson.leaderBoard.push(newUser)
+    const updatedJson = JSON.stringify(leaderBoardJson, null, 4)
+    fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedJson, (err) => {
+      if (err) return res.status(500).send('500 error unable to write leaderboard')
+      displayQuestion(req, res, newUser.userId, 1)
+    })
+  })
+})
+  
+/*   getLeaderboard((err, leaderboardJson) => {
     if (err) return res.status(500).send('500 error unable to read leaderboard')
     const updatedLeaderboard = JSON.stringify(leaderboardJson.leaderBoard.push(newUser))
     fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedLeaderboard, (err) => {
@@ -37,14 +54,15 @@ router.post('/createUser', (req, res) => {
 })
 
 function getLeaderboard (callback) {
-  fs.readFile(path.join(__dirname, 'leaderboard.json'), (err, leaderboardData) => {
+  const jsonPath = path.join(__dirname, 'leaderboard.json')
+  fs.readFile(jsonPath, (err, leaderboardData) => {
     if (err) {
       callback(err, null)
     }
     const leaderboardJson = JSON.parse(leaderboardData)
     callback(null, leaderboardJson)
   })
-}
+} */
 
 function displayQuestion (req, res, userId, questionId) {
   // function to grab the question object for given questionID from questions.json and set to viewData
