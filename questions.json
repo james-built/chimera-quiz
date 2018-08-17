@@ -8,7 +8,7 @@
       "textB": "Alburt",
       "textC": "Sheldon",
       "textD": "Clarence",
-      "answer": "Sheldon"
+      "answer": "c"
     },
     {
       "questionId": 2,
@@ -18,7 +18,7 @@
       "textB": "Angelica",
       "textC": "Tommy",
       "textD": "Susie",
-      "answer": "Angelica"
+      "answer": "b"
     },
     {
       "questionId": 3,
@@ -28,7 +28,7 @@
       "textB": "I’ve gotta catch ‘em all",
       "textC": "to catch them will be a huge test",
       "textD": "like no one ever was",
-      "answer": "like no one ever was"
+      "answer": "d"
     }
   ]
 }
