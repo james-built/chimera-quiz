@@ -112,5 +112,14 @@ router.post('/submitAnswer', (req, res) => {
 })
 // displayQuestion(req, res, userId, nextQuestion++)
 router.get('/leaderboard', (req, res) => {
-  res.send('leaderboard')
+  const jsonPath = path.join(__dirname, 'leaderboard.json')
+  fs.readFile(jsonPath, (err, leaderBoardData) => {
+    if (err) {
+      console.log('error')
+    }
+    let leaderBoardJson = JSON.parse(leaderBoardData)
+    let sortedBoard = leaderBoardJson.leaderBoard.sort((a, b) => { return b.score - a.score })
+    console.log(sortedBoard)
+    res.render('leaderboard', {sortedBoard})
+  })
 })
