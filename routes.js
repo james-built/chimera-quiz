@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const path = require('path')
 const fs = require('fs')
-const questionJson = require('questions.json')
+const questionJson = require('./questions.json')
 
 module.exports = router
 
