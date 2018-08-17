@@ -35,3 +35,8 @@ input[name=selection] {
   color: rgb(21, 21, 109);
   font-size: 40px;
 }
+
+.container {
+  padding: 80px;
+  text-align: center;
+}

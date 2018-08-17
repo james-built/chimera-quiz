@@ -29,6 +29,57 @@
       "textC": "to catch them will be a huge test",
       "textD": "like no one ever was",
       "answer": "d"
+    },
+    {
+      "questionId": 4,
+      "questionText": "In Hey Arnold, who has had a massive crush on Arnold since preschool?",
+      "questionImage": "images/hey-arnold.jpg",
+      "textA": "Helga",
+      "textB": "Nadine",
+      "textC": "Olga",
+      "textD": "Emma",
+      "answer": "a"
+    },
+    {
+      "questionId": 5,
+      "questionText": "What is the main transportation of Mystery Inc in ScoobyDoo?",
+      "questionImage": "images/mystery-machine.jpeg",
+      "textA": "ScoobyDoo Van",
+      "textB": "Mystery Machine",
+      "textC": "Mystery Inc",
+      "textD": "The Love Machine",
+      "answer": "b"
+    },
+    {
+      "questionId": 6,
+      "questionText": "What colour is Miss Frizzle's hair on Magic School Bus?",
+      "questionImage": "images/schoolbus.png",
+      "textA": "Orange",
+      "textB": "Yellow",
+      "textC": "Blue",
+      "textD": "Brown",
+      "answer": "a"
+    },
+    {
+      "questionId": 7,
+      "questionText": "How many TeleTubbies are there?",
+      "questionImage": "images/teletubbies.jpeg",
+      "textA": "3",
+      "textB": "1",
+      "textC": "4",
+      "textD": "7",
+      "answer": "c"
+    },
+    {
+      "questionId": 8,
+      "questionText": "What are the colours of the PowerPuff Girls?",
+      "questionImage": "images/powerpuff.png",
+      "textA": "Red, Yellow, Blue",
+      "textB": "Green, Pink, Orange",
+      "textC": "Purple, Green, Orange",
+      "textD": "Red, Blue, Green",
+      "answer": "d"
     }
+
   ]
 }
