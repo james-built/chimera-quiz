@@ -1,34 +1,34 @@
 {
   "questions": [
     {
-      "questionId": 0,
+      "questionId": 1,
       "questionText": "What is Plankton’s first name?",
       "questionImage": "/images/Plankton-spongebob-squarepants.jpg",
       "textA": "William",
       "textB": "Alburt",
       "textC": "Sheldon",
       "textD": "Clarence",
-      "answer": "Sheldon"
+      "answer": "c"
     },
     {
-      "questionId": 1,
+      "questionId": 2,
       "questionText": "Who is the oldest Rugrat?",
       "questionImage": "/images/Rugrats.jpg" ,
       "textA": "Chuckie",
       "textB": "Angelica",
       "textC": "Tommy",
       "textD": "Susie",
-      "answer": "Angelica"
+      "answer": "b"
     },
     {
-      "questionId": 2,
+      "questionId": 3,
       "questionText": "Finish the Pokémon theme song. I wanna be the very best... ",
       "questionImage": "images/Pokemon-logo.jpg",
       "textA": "the best that I can be",
       "textB": "I’ve gotta catch ‘em all",
       "textC": "to catch them will be a huge test",
       "textD": "like no one ever was",
-      "answer": "like no one ever was"
+      "answer": "d"
     }
   ]
 }

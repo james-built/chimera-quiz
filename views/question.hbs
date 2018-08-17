@@ -1,4 +1,13 @@
-<h1>
-{{question.textA}}
+<h3>{{question.questionText}}</h3>
+<img src="{{question.questionImage}}">
+<form action="/submitAnswer" method="post">
+  <input type="radio" name= "selection" value="a">{{question.textA}}<br>
+  <input type="radio" name= "selection" value="b">{{question.textB}}<br>
+  <input type="radio" name= "selection" value="c">{{question.textC}}<br>
+  <input type="radio" name= "selection" value="d">{{question.textD}}<br>
+  <input type="hidden" name="questionId" value={{question.questionId}}>
+  <input type="hidden" name="userId" value={{userId}}>
+  <input type="hidden" name="answer" value={{question.answer}}>
+  <input type="submit" value="Submit"></a>
+</form>
 
-</h1>
