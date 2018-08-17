@@ -38,7 +38,7 @@ router.post('/createUser', (req, res) => {
     })
   })
 })
-  
+
 /*   getLeaderboard((err, leaderboardJson) => {
     if (err) return res.status(500).send('500 error unable to read leaderboard')
     const updatedLeaderboard = JSON.stringify(leaderboardJson.leaderBoard.push(newUser))
@@ -91,8 +91,8 @@ router.get('/leaderboard', (req, res) => {
       console.log('error')
     }
     let leaderBoardJson = JSON.parse(leaderBoardData)
-    console.log(newUser)
-
-    leaderBoardJson.leaderBoard.map(x => x.score)
-  res.send('leaderboard')
+    let sortedBoard = leaderBoardJson.leaderBoard.sort((a, b) => { return b.score - a.score })
+    console.log(sortedBoard)
+    res.render('leaderboard', {sortedBoard})
+  })
 })
