@@ -1,11 +1,18 @@
 {
-  "leaderBoard": [
-    {
-      "userId": 0,
-      "name": "Chimera",
-      "date": 0,
-      "score": 0,
-      "done": false
-    }
-  ]
+    "leaderBoard": [
+        {
+            "userId": 0,
+            "name": "Chimera",
+            "date": 0,
+            "score": 0,
+            "done": false
+        },
+        {
+            "userId": "jkxc1vkv",
+            "name": "aaaaa",
+            "date": "Fri Aug 17 2018 13:46:31 GMT+1200 (NZST)",
+            "score": 0,
+            "done": false
+        }
+    ]
 }
