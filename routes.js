@@ -70,15 +70,16 @@ router.post('/submitAnswer', (req, res) => {
 
   // if the user answered the question correctly we need to increase their score by 1
   if (selection === correct) {
-    //
+    // read the leaderboard json from disk. Reading the json from disk should be refactored to a function to avoid duplication of code
     const jsonPath = path.join(__dirname, 'leaderboard.json')
     fs.readFile(jsonPath, (err, leaderBoardData) => {
       if (err) {
-        console.log('error') // we should use a proper error here
+        console.log('error') // we should have used a proper error handler here (like on line 44)
       }
       let leaderBoardJson = JSON.parse(leaderBoardData)
-      const idx = leaderBoardJson.leaderBoard.findIndex(x => x.userId === userId)
-      leaderBoardJson.leaderBoard[idx].score++
+      const idx = leaderBoardJson.leaderBoard.findIndex(x => x.userId === userId) // get the index of our user in the leaderBoardJson array
+      leaderBoardJson.leaderBoard[idx].score++ // use that index to update their score
+      // and write back to disk
       const updatedJson = JSON.stringify(leaderBoardJson, null, 4)
       fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedJson, (err) => {
         if (err) return res.status(500).send('500 error unable to write leaderboard')
