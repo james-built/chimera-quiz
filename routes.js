@@ -18,22 +18,26 @@ router.get('/signup', (req, res) => {
   res.render('signup', {title: 'signup'})
 })
 
+// this route takes in the the form post data from /signup
 router.post('/createUser', (req, res) => {
+  //create a new user object from the post data
   const newUser = {
-    userId: (+new Date()).toString(36),
-    name: req.body.name,
-    date: Date(),
-    score: 0,
-    done: false
+    userId: (+new Date()).toString(36), // this generates a unique id for our user using the current time and converting to base 36
+    name: req.body.name, // the users name from the post data
+    date: Date(), // current date (and time)
+    score: 0, // default score of 0
+    done: false // We didn't end up using this but it would have meant that only completed quizes would show on the leaderboard.
   }
+
+  // read in the leaderboard json
   const jsonPath = path.join(__dirname, 'leaderboard.json')
   fs.readFile(jsonPath, (err, leaderBoardData) => {
     if (err) {
-      console.log('error')
+      console.log('error') // we should have used a proper error handler here (like on line 42)
     }
-    let leaderBoardJson = JSON.parse(leaderBoardData)
-    leaderBoardJson.leaderBoard.push(newUser)
-    const updatedJson = JSON.stringify(leaderBoardJson, null, 4)
+    let leaderBoardJson = JSON.parse(leaderBoardData) // convert the leaderboard json file/string to a javascript object
+    leaderBoardJson.leaderBoard.push(newUser) // add the new user we created to the object
+    const updatedJson = JSON.stringify(leaderBoardJson, null, 4) // convert the javascript object back to a json string
     fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedJson, (err) => {
       if (err) return res.status(500).send('500 error unable to write leaderboard')
       displayQuestion(req, res, newUser.userId, 1)
