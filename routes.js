@@ -66,7 +66,7 @@ router.post('/submitAnswer', (req, res) => {
   const userId = req.body.userId // get userid from post
   const questionId = req.body.questionId // get question answered by user from post
   let nextQuestion = parseInt(questionId) // convert the questionid to a number
-  nextQuestion++ //and increase it by one
+  nextQuestion++ // and increase it by one
 
   // if the user answered the question correctly we need to increase their score by 1
   if (selection === correct) {
@@ -86,7 +86,7 @@ router.post('/submitAnswer', (req, res) => {
       })
     })
   }
-  // get the length of 
+  // get the number of questions and checks if there is another question after the current. If yes then use the displayQuestion function to render the next question. If no then redirect to the leaderboard
   const count = questionJson.questions.length
   if (nextQuestion <= count) {
     displayQuestion(req, res, userId, nextQuestion)
@@ -94,7 +94,7 @@ router.post('/submitAnswer', (req, res) => {
     res.redirect('/leaderboard')
 }
 })
-// displayQuestion(req, res, userId, nextQuestion++)
+
 router.get('/leaderboard', (req, res) => {
   const jsonPath = path.join(__dirname, 'leaderboard.json')
   fs.readFile(jsonPath, (err, leaderBoardData) => {
