@@ -59,7 +59,7 @@ function displayQuestion (req, res, userId, questionId) {
   res.render('question', viewData)
 }
 
-// submit question
+// takes post data from the question view, checks if the user is correct and updates their score. Renders the next question if there is another, if not redirects to the leaderboard
 router.post('/submitAnswer', (req, res) => {
   const selection = req.body.selection // get the answer selected by the user from post data
   const correct = req.body.answer // get the correct answer from the post data (ideally we would not pass this around in the post data, we did the to reduce complexity in our routes)
@@ -86,7 +86,7 @@ router.post('/submitAnswer', (req, res) => {
       })
     })
   }
-
+  // get the length of 
   const count = questionJson.questions.length
   if (nextQuestion <= count) {
     displayQuestion(req, res, userId, nextQuestion)
