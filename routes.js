@@ -20,7 +20,7 @@ router.get('/signup', (req, res) => {
 
 // this route takes in the the form post data from /signup
 router.post('/createUser', (req, res) => {
-  //create a new user object from the post data
+  // create a new user object from the post data
   const newUser = {
     userId: (+new Date()).toString(36), // this generates a unique id for our user using the current time and converting to base 36
     name: req.body.name, // the users name from the post data
@@ -39,7 +39,7 @@ router.post('/createUser', (req, res) => {
     leaderBoardJson.leaderBoard.push(newUser) // add the new user we created to the object
     const updatedJson = JSON.stringify(leaderBoardJson, null, 4) // convert the javascript object back to a json string
 
-    //write the  json string back to disk
+    // write the  json string back to disk
     fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedJson, (err) => {
       if (err) return res.status(500).send('500 error unable to write leaderboard')
       displayQuestion(req, res, newUser.userId, 1) // once we have written to disk, pass in the user id and 1 to the  displayQuestion function to render the first question
@@ -50,7 +50,7 @@ router.post('/createUser', (req, res) => {
 // we could have had this code in the /createUser route but then we would have to duplicate in in the submitAnswer route
 function displayQuestion (req, res, userId, questionId) {
   const ourQuestion = questionJson.questions.find(x => x.questionId === parseInt(questionId)) // find the current question from the questions json (we import this file in rather than reading from disk - this file is not changing often)
-  //create a viewData object to render multiple things to the view
+  // create a viewData object to render multiple things to the view
   const viewData = {
     title: 'Question ' + questionId,
     userId: userId, // pass in the user id so we can update their score later
@@ -92,9 +92,10 @@ router.post('/submitAnswer', (req, res) => {
     displayQuestion(req, res, userId, nextQuestion)
   } else {
     res.redirect('/leaderboard')
-}
+  }
 })
 
+// read the leaderboard json, sort it largest to smallest, and render to leaderboard view
 router.get('/leaderboard', (req, res) => {
   const jsonPath = path.join(__dirname, 'leaderboard.json')
   fs.readFile(jsonPath, (err, leaderBoardData) => {
