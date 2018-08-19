@@ -33,7 +33,7 @@ router.post('/createUser', (req, res) => {
   const jsonPath = path.join(__dirname, 'leaderboard.json')
   fs.readFile(jsonPath, (err, leaderBoardData) => {
     if (err) {
-      console.log('error') // we should have used a proper error handler here (like on line 42)
+      console.log('error') // we should have used a proper error handler here (like on line 44)
     }
     let leaderBoardJson = JSON.parse(leaderBoardData) // convert the leaderboard json file/string to a javascript object
     leaderBoardJson.leaderBoard.push(newUser) // add the new user we created to the object
@@ -65,13 +65,16 @@ router.post('/submitAnswer', (req, res) => {
   const correct = req.body.answer // get the correct answer from the post data (ideally we would not pass this around in the post data, we did the to reduce complexity in our routes)
   const userId = req.body.userId // get userid from post
   const questionId = req.body.questionId // get question answered by user from post
-  let nextQuestion = parseInt(questionId) // 
-  nextQuestion++
+  let nextQuestion = parseInt(questionId) // convert the questionid to a number
+  nextQuestion++ //and increase it by one
+
+  // if the user answered the question correctly we need to increase their score by 1
   if (selection === correct) {
+    //
     const jsonPath = path.join(__dirname, 'leaderboard.json')
     fs.readFile(jsonPath, (err, leaderBoardData) => {
       if (err) {
-        console.log('error')
+        console.log('error') // we should use a proper error here
       }
       let leaderBoardJson = JSON.parse(leaderBoardData)
       const idx = leaderBoardJson.leaderBoard.findIndex(x => x.userId === userId)
@@ -82,6 +85,7 @@ router.post('/submitAnswer', (req, res) => {
       })
     })
   }
+
   const count = questionJson.questions.length
   if (nextQuestion <= count) {
     displayQuestion(req, res, userId, nextQuestion)
