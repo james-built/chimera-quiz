@@ -61,12 +61,11 @@ function displayQuestion (req, res, userId, questionId) {
 
 // submit question
 router.post('/submitAnswer', (req, res) => {
-  const selection = req.body.selection
-  const correct = req.body.answer
-  const userId = req.body.userId
-  //const userId2 = req.body.userId
-  const questionId = req.body.questionId
-  let nextQuestion = parseInt(questionId)
+  const selection = req.body.selection // get the answer selected by the user from post data
+  const correct = req.body.answer // get the correct answer from the post data (ideally we would not pass this around in the post data, we did the to reduce complexity in our routes)
+  const userId = req.body.userId // get userid from post
+  const questionId = req.body.questionId // get question answered by user from post
+  let nextQuestion = parseInt(questionId) // 
   nextQuestion++
   if (selection === correct) {
     const jsonPath = path.join(__dirname, 'leaderboard.json')
