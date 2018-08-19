@@ -38,23 +38,25 @@ router.post('/createUser', (req, res) => {
     let leaderBoardJson = JSON.parse(leaderBoardData) // convert the leaderboard json file/string to a javascript object
     leaderBoardJson.leaderBoard.push(newUser) // add the new user we created to the object
     const updatedJson = JSON.stringify(leaderBoardJson, null, 4) // convert the javascript object back to a json string
+
+    //write the  json string back to disk
     fs.writeFile(path.join(__dirname, 'leaderboard.json'), updatedJson, (err) => {
       if (err) return res.status(500).send('500 error unable to write leaderboard')
-      displayQuestion(req, res, newUser.userId, 1)
+      displayQuestion(req, res, newUser.userId, 1) // once we have written to disk, pass in the user id and 1 to the  displayQuestion function to render the first question
     })
   })
 })
 
+// we could have had this code in the /createUser route but then we would have to duplicate in in the submitAnswer route
 function displayQuestion (req, res, userId, questionId) {
-  // function to grab the question object for given questionID from questions.json and set to viewData
-  const ourQuestion = questionJson.questions.find(x => x.questionId === parseInt(questionId))
+  const ourQuestion = questionJson.questions.find(x => x.questionId === parseInt(questionId)) // find the current question from the questions json (we import this file in rather than reading from disk - this file is not changing often)
+  //create a viewData object to render multiple things to the view
   const viewData = {
     title: 'Question ' + questionId,
-    userId: userId,
-    question: ourQuestion
+    userId: userId, // pass in the user id so we can update their score later
+    question: ourQuestion // pass in the whole question object to the view
   }
   res.render('question', viewData)
-  // render viewData to question.hbs
 }
 
 // submit question
